@@ -1,0 +1,7 @@
+[package]
+name = "nan-preserving-float"
+version = "0.1.0"
+authors = ["Vurich <jackefransham@gmail.com>"]
+
+[dev-dependencies]
+rand = "*"
