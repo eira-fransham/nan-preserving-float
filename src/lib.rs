@@ -113,6 +113,30 @@ macro_rules! float {
 float!(F32, u32, f32);
 float!(F64, u64, f64);
 
+impl From<u32> for F32 {
+    fn from(other: u32) -> Self {
+        Self::from_bits(other)
+    }
+}
+
+impl From<F32> for u32 {
+    fn from(other: F32) -> Self {
+        other.to_bits()
+    }
+}
+
+impl From<u64> for F64 {
+    fn from(other: u64) -> Self {
+        Self::from_bits(other)
+    }
+}
+
+impl From<F64> for u64 {
+    fn from(other: F64) -> Self {
+        other.to_bits()
+    }
+}
+
 #[cfg(test)]
 mod tests {
     extern crate rand;
