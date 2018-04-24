@@ -2,6 +2,8 @@
 name = "nan-preserving-float"
 version = "0.1.0"
 authors = ["Vurich <jackefransham@gmail.com>"]
+description = "(Mostly) drop-in replacement for floats that preserves the signalling bit in NaNs under conversions and unary operations"
+license = "Unlicense"
 
 [dev-dependencies]
-rand = "*"
+rand = "0.4.2"

@@ -192,7 +192,7 @@ mod tests {
         let mut rng = rand::thread_rng();
         let iter = iter::repeat(()).map(|_| rng.gen());
 
-        test_ops::<F32, f32, _>(iter.take(1000));
+        test_ops::<F64, f64, _>(iter.take(1000));
     }
 
     #[test]
