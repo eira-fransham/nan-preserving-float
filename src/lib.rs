@@ -1,5 +1,15 @@
-use std::ops::{Add, Div, Mul, Neg, Sub, Rem};
-use std::cmp::{Ordering, PartialEq, PartialOrd};
+#![cfg_attr(not(feature = "std"), no_std)]
+
+#[cfg(feature = "std")]
+extern crate core;
+
+#[cfg(not(feature = "std"))]
+extern crate libm;
+#[cfg(not(feature = "std"))]
+use libm::{F32Ext, F64Ext};
+
+use core::ops::{Add, Div, Mul, Neg, Sub, Rem};
+use core::cmp::{Ordering, PartialEq, PartialOrd};
 
 macro_rules! impl_binop {
     ($for:ident, $is:ident, $op:ident, $func_name:ident) => {
@@ -20,7 +30,7 @@ macro_rules! impl_binop {
 
 macro_rules! float {
     ($for:ident, $rep:ident, $is:ident) => {
-        float!($for, $rep, $is, 1 << (::std::mem::size_of::<$is>() * 8 - 1));
+        float!($for, $rep, $is, 1 << (::core::mem::size_of::<$is>() * 8 - 1));
     };
     ($for:ident, $rep:ident, $is:ident, $sign_bit:expr) => {
         #[derive(Copy, Clone)]
@@ -102,8 +112,8 @@ macro_rules! float {
             }
         }
 
-        impl ::std::fmt::Debug for $for {
-            fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
+        impl ::core::fmt::Debug for $for {
+            fn fmt(&self, f: &mut ::core::fmt::Formatter) -> ::core::fmt::Result {
                 $is::from(*self).fmt(f)
             }
         }
@@ -145,9 +155,9 @@ mod tests {
 
     use super::{F32, F64};
 
-    use std::ops::{Add, Div, Mul, Neg, Sub};
-    use std::fmt::Debug;
-    use std::iter;
+    use core::ops::{Add, Div, Mul, Neg, Sub};
+    use core::fmt::Debug;
+    use core::iter;
 
     fn test_ops<T, F, I>(iter: I)
     where

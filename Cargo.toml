@@ -5,5 +5,12 @@ authors = ["Vurich <jackefransham@gmail.com>"]
 description = "(Mostly) drop-in replacement for floats that preserves the signalling bit in NaNs under conversions and unary operations"
 license = "Unlicense"
 
+[features]
+default = ["std"]
+std = []
+
+[target.'cfg(not(feature = "std"))'.dependencies]
+libm = "0.1.2"
+
 [dev-dependencies]
 rand = "0.4.2"
